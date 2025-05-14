@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 import "./Game.css";
+import confetti from "canvas-confetti";
 
 const Game = ({ words }) => {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedPairs, setMatchedPairs] = useState([]);
+  const [gameWon, setGameWon] = useState(false);
 
   useEffect(() => {
     // Create pairs of cards from the words
@@ -19,6 +21,17 @@ const Game = ({ words }) => {
     const shuffledCards = cardPairs.sort(() => Math.random() - 0.5);
     setCards(shuffledCards);
   }, [words]);
+
+  useEffect(() => {
+    if (matchedPairs.length === cards.length && cards.length > 0) {
+      setGameWon(true);
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+    }
+  }, [matchedPairs, cards.length]);
 
   const handleCardClick = (id) => {
     if (flippedCards.length === 2) return;
@@ -45,6 +58,7 @@ const Game = ({ words }) => {
 
   return (
     <div className="game">
+      {gameWon && <h2>You Won!</h2>}
       <div className="cards">
         {cards.map((card) => (
           <Card
