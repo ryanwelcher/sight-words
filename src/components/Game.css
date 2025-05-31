@@ -3,12 +3,46 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%;
+  min-height: calc(100vh - 200px);
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
+  width: 100%;
   max-width: 1200px;
   justify-items: center;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+}
+
+button {
+  background-color: #8B4513;
+  color: white;
+  border: 2px solid #5B3A1A;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: 'Minecraft', Arial, sans-serif;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #A0522D;
 } 

@@ -3,7 +3,7 @@ import Card from "./Card";
 import "./Game.css";
 import confetti from "canvas-confetti";
 
-const Game = ({ words }) => {
+const Game = ({ words, onRestart }) => {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedPairs, setMatchedPairs] = useState([]);
@@ -56,9 +56,22 @@ const Game = ({ words }) => {
     }
   };
 
+  const handleRestart = () => {
+    setCards([]);
+    setFlippedCards([]);
+    setMatchedPairs([]);
+    setGameWon(false);
+    onRestart();
+  };
+
   return (
     <div className="game">
-      {gameWon && <h2>You Won!</h2>}
+      {gameWon && (
+        <div>
+          <h2>You Won!</h2>
+          <button onClick={handleRestart}>Play Again</button>
+        </div>
+      )}
       <div className="cards">
         {cards.map((card) => (
           <Card
