@@ -60,26 +60,66 @@ function App() {
             <button
               className={difficulty === "easy" ? "selected" : ""}
               onClick={() => handleDifficultySelect("easy")}
+              aria-label="Easy difficulty"
             >
-              Easy (4 Pairs)
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
             </button>
             <button
               className={difficulty === "medium" ? "selected" : ""}
               onClick={() => handleDifficultySelect("medium")}
+              aria-label="Medium difficulty"
             >
-              Medium (8 Pairs)
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
             </button>
             <button
               className={difficulty === "hard" ? "selected" : ""}
               onClick={() => handleDifficultySelect("hard")}
+              aria-label="Hard difficulty"
             >
-              Hard (12 Pairs)
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
             </button>
             <button
               className={difficulty === "master" ? "selected" : ""}
               onClick={() => handleDifficultySelect("master")}
+              aria-label="Master difficulty"
             >
-              Master (All Words)
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
+              <img
+                src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
+                alt="creeper"
+              />
             </button>
           </div>
           <h2>Select a Level</h2>
@@ -101,7 +141,15 @@ function App() {
         </div>
       ) : (
         <div>
-          <h2>Level: {selectedLevel}</h2>
+          <button
+            className="back-button"
+            onClick={handleRestart}
+            aria-label="Back to menu"
+          >
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+            </svg>
+          </button>
           <h3>
             Difficulty:{" "}
             {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
