@@ -20,11 +20,11 @@ function App() {
 
     switch (level) {
       case "easy":
-        pairCount = 4;
+        pairCount = 6;
         words = getRandomWords(selectedLevel, pairCount);
         break;
       case "medium":
-        pairCount = 8;
+        pairCount = 9;
         words = getRandomWords(selectedLevel, pairCount);
         break;
       case "hard":
@@ -36,7 +36,7 @@ function App() {
         pairCount = words.length;
         break;
       default:
-        pairCount = 8;
+        pairCount = 9;
         words = getRandomWords(selectedLevel, pairCount);
     }
 
