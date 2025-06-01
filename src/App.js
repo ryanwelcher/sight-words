@@ -6,48 +6,47 @@ import "./App.css";
 function App() {
   const [gameWords, setGameWords] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
-  const [selectedLevel, setSelectedLevel] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("prePrimer");
   const [difficulty, setDifficulty] = useState("medium");
 
   const handleLevelSelect = (level) => {
+    setSelectedLevel(level);
+  };
+
+  const handleDifficultySelect = (level) => {
+    setDifficulty(level);
     let words;
     let pairCount;
 
-    switch (difficulty) {
+    switch (level) {
       case "easy":
         pairCount = 4;
-        words = getRandomWords(level, pairCount);
+        words = getRandomWords(selectedLevel, pairCount);
         break;
       case "medium":
         pairCount = 8;
-        words = getRandomWords(level, pairCount);
+        words = getRandomWords(selectedLevel, pairCount);
         break;
       case "hard":
         pairCount = 12;
-        words = getRandomWords(level, pairCount);
+        words = getRandomWords(selectedLevel, pairCount);
         break;
       case "master":
-        words = dolchWords[level];
+        words = dolchWords[selectedLevel];
         pairCount = words.length;
         break;
       default:
         pairCount = 8;
-        words = getRandomWords(level, pairCount);
+        words = getRandomWords(selectedLevel, pairCount);
     }
 
     setGameWords(words);
     setGameStarted(true);
-    setSelectedLevel(level);
   };
 
   const handleRestart = () => {
     setGameStarted(false);
     setGameWords([]);
-    setSelectedLevel("");
-  };
-
-  const handleDifficultySelect = (level) => {
-    setDifficulty(level);
   };
 
   const getLevelNumber = (level) => {
@@ -66,7 +65,40 @@ function App() {
       <h1>Memory Game</h1>
       {!gameStarted ? (
         <div className="level-selection">
-          <h2>Select Difficulty</h2>
+          <h2>Level</h2>
+          <div className="level-buttons">
+            <button
+              onClick={() => handleLevelSelect("prePrimer")}
+              className={selectedLevel === "prePrimer" ? "selected" : ""}
+            >
+              1
+            </button>
+            <button
+              onClick={() => handleLevelSelect("primer")}
+              className={selectedLevel === "primer" ? "selected" : ""}
+            >
+              2
+            </button>
+            <button
+              onClick={() => handleLevelSelect("firstGrade")}
+              className={selectedLevel === "firstGrade" ? "selected" : ""}
+            >
+              3
+            </button>
+            <button
+              onClick={() => handleLevelSelect("secondGrade")}
+              className={selectedLevel === "secondGrade" ? "selected" : ""}
+            >
+              4
+            </button>
+            <button
+              onClick={() => handleLevelSelect("thirdGrade")}
+              className={selectedLevel === "thirdGrade" ? "selected" : ""}
+            >
+              5
+            </button>
+          </div>
+          <h2>Difficulty</h2>
           <div className="difficulty-buttons">
             <button
               className={difficulty === "easy" ? "selected" : ""}
@@ -131,22 +163,6 @@ function App() {
                 src="https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg"
                 alt="creeper"
               />
-            </button>
-          </div>
-          <h2>Select a Level</h2>
-          <div className="level-buttons">
-            <button onClick={() => handleLevelSelect("prePrimer")}>
-              Level 1
-            </button>
-            <button onClick={() => handleLevelSelect("primer")}>Level 2</button>
-            <button onClick={() => handleLevelSelect("firstGrade")}>
-              Level 3
-            </button>
-            <button onClick={() => handleLevelSelect("secondGrade")}>
-              Level 4
-            </button>
-            <button onClick={() => handleLevelSelect("thirdGrade")}>
-              Level 5
             </button>
           </div>
         </div>
