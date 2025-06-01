@@ -36,11 +36,18 @@ const Game = ({ words, onRestart }) => {
       // Wait 3 seconds before showing the final challenge
       setTimeout(() => {
         setShowFinalChallenge(true);
-        // Announce the final challenge word
-        const speech = new SpeechSynthesisUtterance(
-          `Find the word ${randomWord}`
-        );
-        window.speechSynthesis.speak(speech);
+        // Announce the final challenge word with a pause
+        const introSpeech = new SpeechSynthesisUtterance("Find the word");
+        const wordSpeech = new SpeechSynthesisUtterance(randomWord);
+
+        // Queue up the second utterance to start after the first one
+        introSpeech.onend = () => {
+          setTimeout(() => {
+            window.speechSynthesis.speak(wordSpeech);
+          }, 500); // 500ms pause between utterances
+        };
+
+        window.speechSynthesis.speak(introSpeech);
       }, 3000);
 
       confetti({
