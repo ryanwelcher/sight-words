@@ -7,17 +7,34 @@ function App() {
   const [gameWords, setGameWords] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState("");
-  const [pairCount, setPairCount] = useState("8");
+  const [difficulty, setDifficulty] = useState("medium");
 
   const handleLevelSelect = (level) => {
     let words;
-    if (pairCount === "all") {
-      // Use all words from the level
-      words = dolchWords[level];
-    } else {
-      // Get random words based on selected pair count
-      words = getRandomWords(level, parseInt(pairCount));
+    let pairCount;
+
+    switch (difficulty) {
+      case "easy":
+        pairCount = 4;
+        words = getRandomWords(level, pairCount);
+        break;
+      case "medium":
+        pairCount = 8;
+        words = getRandomWords(level, pairCount);
+        break;
+      case "hard":
+        pairCount = 12;
+        words = getRandomWords(level, pairCount);
+        break;
+      case "master":
+        words = dolchWords[level];
+        pairCount = words.length;
+        break;
+      default:
+        pairCount = 8;
+        words = getRandomWords(level, pairCount);
     }
+
     setGameWords(words);
     setGameStarted(true);
     setSelectedLevel(level);
@@ -29,8 +46,8 @@ function App() {
     setSelectedLevel("");
   };
 
-  const handlePairCountChange = (e) => {
-    setPairCount(e.target.value);
+  const handleDifficultySelect = (level) => {
+    setDifficulty(level);
   };
 
   return (
@@ -38,20 +55,34 @@ function App() {
       <h1>Memory Game</h1>
       {!gameStarted ? (
         <div className="level-selection">
-          <h2>Select a Level</h2>
-          <div className="pair-count-selection">
-            <label htmlFor="pairCount">Number of Pairs:</label>
-            <select
-              id="pairCount"
-              value={pairCount}
-              onChange={handlePairCountChange}
+          <h2>Select Difficulty</h2>
+          <div className="difficulty-buttons">
+            <button
+              className={difficulty === "easy" ? "selected" : ""}
+              onClick={() => handleDifficultySelect("easy")}
             >
-              <option value="4">4 Pairs</option>
-              <option value="8">8 Pairs</option>
-              <option value="12">12 Pairs</option>
-              <option value="all">All Words</option>
-            </select>
+              Easy (4 Pairs)
+            </button>
+            <button
+              className={difficulty === "medium" ? "selected" : ""}
+              onClick={() => handleDifficultySelect("medium")}
+            >
+              Medium (8 Pairs)
+            </button>
+            <button
+              className={difficulty === "hard" ? "selected" : ""}
+              onClick={() => handleDifficultySelect("hard")}
+            >
+              Hard (12 Pairs)
+            </button>
+            <button
+              className={difficulty === "master" ? "selected" : ""}
+              onClick={() => handleDifficultySelect("master")}
+            >
+              Master (All Words)
+            </button>
           </div>
+          <h2>Select a Level</h2>
           <div className="level-buttons">
             <button onClick={() => handleLevelSelect("prePrimer")}>
               Pre-Primer
@@ -71,7 +102,10 @@ function App() {
       ) : (
         <div>
           <h2>Level: {selectedLevel}</h2>
-          <h3>Pairs: {pairCount === "all" ? "All Words" : pairCount}</h3>
+          <h3>
+            Difficulty:{" "}
+            {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+          </h3>
           <Game words={gameWords} onRestart={handleRestart} />
         </div>
       )}
