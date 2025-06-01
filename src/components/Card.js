@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./Card.css";
 
-const Card = ({ word, isFlipped, onClick }) => {
+const Card = ({ word, isFlipped, onClick, disabled }) => {
   useEffect(() => {
     if (isFlipped) {
       const speech = new SpeechSynthesisUtterance(word);
@@ -16,7 +16,12 @@ const Card = ({ word, isFlipped, onClick }) => {
     "https://m.media-amazon.com/images/I/31olIWRlnCL._AC_SY1000_.jpg";
 
   return (
-    <div className={`card ${isFlipped ? "flipped" : ""}`} onClick={onClick}>
+    <div
+      className={`card ${isFlipped ? "flipped" : ""} ${
+        disabled ? "disabled" : ""
+      }`}
+      onClick={disabled ? undefined : onClick}
+    >
       <div className="card-inner">
         <div className="card-front">
           <img src={creeper} alt="Card Back" width="120" />

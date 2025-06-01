@@ -5,6 +5,12 @@
   cursor: pointer;
 }
 
+.card.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .card-inner {
   position: relative;
   width: 100%;
