@@ -15,10 +15,31 @@ html, body {
   text-align: center;
   padding: 20px;
   background-color: #f0f0f0;
-  color: #333;
+  color: white;
   font-family: Arial, sans-serif;
   min-height: 100vh;
+  background-image: url('https://wallpapers.com/images/featured/minecraft-s2kxfahyg30sob8q.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   position: relative;
+}
+
+.App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+}
+
+.App > * {
+  position: relative;
+  z-index: 1;
 }
 
 .level-selection {
@@ -127,17 +148,17 @@ html, body {
 }
 
 h1 {
-  color: #2c3e50;
+  color: white;
   margin-bottom: 30px;
 }
 
 h2 {
-  color: #34495e;
+  color: white;
   margin-bottom: 20px;
 }
 
 h3 {
-  color: #34495e;
+  color: white;
   margin-bottom: 15px;
 }
 

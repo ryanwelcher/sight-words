@@ -50,6 +50,17 @@ function App() {
     setDifficulty(level);
   };
 
+  const getLevelNumber = (level) => {
+    const levelMap = {
+      prePrimer: 1,
+      primer: 2,
+      firstGrade: 3,
+      secondGrade: 4,
+      thirdGrade: 5,
+    };
+    return levelMap[level] || "";
+  };
+
   return (
     <div className="App">
       <h1>Memory Game</h1>
@@ -125,17 +136,17 @@ function App() {
           <h2>Select a Level</h2>
           <div className="level-buttons">
             <button onClick={() => handleLevelSelect("prePrimer")}>
-              Pre-Primer
+              Level 1
             </button>
-            <button onClick={() => handleLevelSelect("primer")}>Primer</button>
+            <button onClick={() => handleLevelSelect("primer")}>Level 2</button>
             <button onClick={() => handleLevelSelect("firstGrade")}>
-              First Grade
+              Level 3
             </button>
             <button onClick={() => handleLevelSelect("secondGrade")}>
-              Second Grade
+              Level 4
             </button>
             <button onClick={() => handleLevelSelect("thirdGrade")}>
-              Third Grade
+              Level 5
             </button>
           </div>
         </div>
@@ -150,6 +161,7 @@ function App() {
               <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
             </svg>
           </button>
+          <h2>Level {getLevelNumber(selectedLevel)}</h2>
           <h3>
             Difficulty:{" "}
             {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
