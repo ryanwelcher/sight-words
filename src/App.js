@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   const [gameWords, setGameWords] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
-  const [selectedLevel, setSelectedLevel] = useState("prePrimer");
+  const [selectedLevel, setSelectedLevel] = useState("oneTwoLetter");
   const [difficulty, setDifficulty] = useState("medium");
 
   const handleLevelSelect = (level) => {
@@ -51,11 +51,12 @@ function App() {
 
   const getLevelNumber = (level) => {
     const levelMap = {
-      prePrimer: 1,
-      primer: 2,
-      firstGrade: 3,
-      secondGrade: 4,
-      thirdGrade: 5,
+      oneTwoLetter: 1,
+      prePrimer: 2,
+      primer: 3,
+      firstGrade: 4,
+      secondGrade: 5,
+      thirdGrade: 6,
     };
     return levelMap[level] || "";
   };
@@ -68,34 +69,40 @@ function App() {
           <h2>Level</h2>
           <div className="level-buttons">
             <button
+              onClick={() => handleLevelSelect("oneTwoLetter")}
+              className={selectedLevel === "oneTwoLetter" ? "selected" : ""}
+            >
+              1
+            </button>
+            <button
               onClick={() => handleLevelSelect("prePrimer")}
               className={selectedLevel === "prePrimer" ? "selected" : ""}
             >
-              1
+              2
             </button>
             <button
               onClick={() => handleLevelSelect("primer")}
               className={selectedLevel === "primer" ? "selected" : ""}
             >
-              2
+              3
             </button>
             <button
               onClick={() => handleLevelSelect("firstGrade")}
               className={selectedLevel === "firstGrade" ? "selected" : ""}
             >
-              3
+              4
             </button>
             <button
               onClick={() => handleLevelSelect("secondGrade")}
               className={selectedLevel === "secondGrade" ? "selected" : ""}
             >
-              4
+              5
             </button>
             <button
               onClick={() => handleLevelSelect("thirdGrade")}
               className={selectedLevel === "thirdGrade" ? "selected" : ""}
             >
-              5
+              6
             </button>
           </div>
           <h2>Difficulty</h2>
